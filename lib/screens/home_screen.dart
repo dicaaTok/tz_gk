@@ -25,7 +25,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Items')),
+      appBar: AppBar(
+          elevation: 4,
+          backgroundColor: Colors.blueAccent,
+          title: Text(
+              'Items',
+              style: TextStyle(
+            fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+          ),
+        centerTitle: true,
+      ),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -34,15 +45,14 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 400),
-                  pageBuilder: ( , ,  ) => DetailScreen(item: item),
-                transitionsBuilder: ( , animation, secondaryAnimation, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  )
-              );
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 400),
+                      pageBuilder: (_, __, ___) => DetailScreen(item: item),
+                      transitionsBuilder: (_, animation, __, child) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                    ),
+                  );
             },
             child: Card(
               margin: EdgeInsets.all(12),
